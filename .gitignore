@@ -1,0 +1,79 @@
+# ==============================================================================
+# Motif .gitignore — Comprehensive exclusion rules for Python, C++, Android, CMake
+# ==============================================================================
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.dylib
+*.dll
+*.a
+*.lib
+*.o
+*.obj
+
+# C++ & CMake Build Artifacts
+build/
+bin/
+cmake-build-*/
+CMakeCache.txt
+CMakeFiles/
+Makefile
+cmake_install.cmake
+install_manifest.txt
+compile_commands.json
+
+# Shaders & Binary SPIR-V Bytecode
+*.spv
+/tmp/*.spv
+/tmp/*.comp
+
+# Android & Gradle Build Artifacts
+.gradle/
+.cxx/
+local.properties
+captures/
+.externalNativeBuild/
+.navigation/
+*.apk
+*.aab
+*.keystore
+
+# Android project specific build outputs
+examples/android/.gradle/
+examples/android/.idea/
+examples/android/app/build/
+examples/android/build/
+examples/android/local.properties
+examples/android/.cxx/
+
+# Python Virtual Environments & Distribution
+venv/
+.venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+.pytest_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+*.egg-info/
+dist/
+eggs/
+.eggs/
+
+# IDE & Editor Configurations
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Temporary & Log Files
+*.log
+scratch/
+generated/test_runner.cpp

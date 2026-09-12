@@ -1,0 +1,24 @@
+#version 450
+layout(local_size_x = 16, local_size_y = 16) in;
+
+layout(binding = 0) buffer BufA { float a[]; };
+layout(binding = 1) buffer BufB { float b[]; };
+layout(binding = 2) buffer BufC { float c[]; };
+
+layout(push_constant) uniform Params {
+    uint M;
+    uint N;
+    uint K;
+} params;
+
+void main() {
+    uint row = gl_GlobalInvocationID.x;
+    uint col = gl_GlobalInvocationID.y;
+    if (row < params.M && col < params.N) {
+        float acc = 0.0;
+        for (uint k = 0; k < params.K; k++) {
+            acc += a[row * params.K + k] * b[k * params.N + col];
+        }
+        c[row * params.N + col] = acc;
+    }
+}
