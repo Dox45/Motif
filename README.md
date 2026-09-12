@@ -15,7 +15,7 @@
 
 ---
 
-## 💡 Overview
+## Overview
 
 **Motif** is a specialized, lightweight domain-specific compiler and native GPU dispatch pipeline designed to bridge Python compute kernels directly to Vulkan GPU compute shaders (GLSL 450 / SPIR-V) and mobile hardware (Android NDK & C++).
 
@@ -29,24 +29,24 @@ Motif v0.1.0 ships with a complete, modernized **Android 15 (API 35)** Jetpack C
 
 ---
 
-## 🏗️ Architecture & Compilation Pipeline
+## Architecture & Compilation Pipeline
 
 ```mermaid
 flowchart TD
-    A["🐍 Python @motif.kernel Function"] --> B["🔍 AST Parser & Type Analyzer (frontend.py)"]
-    B --> C["⚡ GLSL 450 Compute Shader Generator"]
-    B --> D["📦 Push Constant & Buffer Bindings Map"]
+    A["Python @motif.kernel Function"] --> B["AST Parser & Type Analyzer (frontend.py)"]
+    B --> C["GLSL 450 Compute Shader Generator"]
+    B --> D["Push Constant & Buffer Bindings Map"]
     
-    C --> E["🔨 GLSL Compiler (glslc / glslangValidator)"]
-    E --> F["💾 SPIR-V Bytecode Array"]
+    C --> E["GLSL Compiler (glslc / glslangValidator)"]
+    E --> F["SPIR-V Bytecode Array"]
     
-    F --> G["⚙️ Kompute C++ Code Generator (dispatch.py)"]
+    F --> G["Kompute C++ Code Generator (dispatch.py)"]
     D --> G
     
-    G --> H["🔌 Android JNI Native C++ Bridge (MotifJniNative.cpp)"]
-    G --> I["📱 Type-Safe Kotlin Interface (MotifJni.kt)"]
+    G --> H["Android JNI Native C++ Bridge (MotifJniNative.cpp)"]
+    G --> I["Type-Safe Kotlin Interface (MotifJni.kt)"]
     
-    H --> J["🔥 Android Vulkan GPU Hardware (libvulkan.so)"]
+    H --> J["Android Vulkan GPU Hardware (libvulkan.so)"]
     I --> J
 ```
 
@@ -61,9 +61,9 @@ flowchart TD
 - **Modernized Android 15 Showcase App**:
   - Built with **Jetpack Compose** & **Material 3** enforcing edge-to-edge UI compliance on Android 15 (API 35).
   - **3 Interactive Tabs**:
-    1. **🤖 ML Logistic Regression Model**: Vulkan GPU training of weights $W_1, W_2$ and bias $B$ with real-time probability prediction sliders.
-    2. **⚡ GLSL Shader Editor**: Live GLSL shader source code editor with preset chips (Vector Add, Logistic Regression, Matrix Multiply) and GPU execution log output.
-    3. **📊 CPU vs. GPU Benchmark**: High-throughput $256 \times 256$ Matrix Multiplication benchmark displaying execution latency, GFLOPS metrics, speedup multipliers, and correctness verification checks.
+    1. **ML Logistic Regression Model**: Vulkan GPU training of weights $W_1, W_2$ and bias $B$ with real-time probability prediction sliders.
+    2. **GLSL Shader Editor**: Live GLSL shader source code editor with preset chips (Vector Add, Logistic Regression, Matrix Multiply) and GPU execution log output.
+    3. **CPU vs. GPU Benchmark**: High-throughput $256 \times 256$ Matrix Multiplication benchmark displaying execution latency, GFLOPS metrics, speedup multipliers, and correctness verification checks.
 
 ---
 
@@ -102,7 +102,7 @@ Motif/
 
 ---
 
-## 🛠️ v0.1.0 Kernel Specification
+## v0.1.0 Kernel Specification
 
 Motif v0.1.0 defines a focused, safe subset of Python designed for elementwise and matrix compute patterns:
 
@@ -118,7 +118,7 @@ Motif v0.1.0 defines a focused, safe subset of Python designed for elementwise a
 
 ---
 
-## 💻 Quickstart Guide
+## Quickstart Guide
 
 ### 1. Requirements
 
@@ -231,13 +231,13 @@ cd examples/android
 
 | Screen Tab | Functionality | Key Highlights |
 | :--- | :--- | :--- |
-| **🤖 ML Logistic** | Train Logistic Regression Model | Interactive sliders for dataset ($X_i, X_j, Y$), iteration count, and learning rate. Displays live weights ($W_1, W_2, B$), loss, and interactive prediction probability indicator. |
-| **⚡ GLSL Editor** | Live GLSL Shader Execution | Multi-line code editor pre-loaded with Vector Add, Logistic Regression, and MatMul shader presets. Runs custom or preset GLSL on Vulkan GPU with latency reporting. |
-| **📊 CPU vs GPU** | Matrix Multiplication Benchmark | Computes $256 \times 256$ matrix multiplication on CPU vs. Motif GPU. Displays latency (ms), throughput (GFLOPS), correctness check, and speedup highlight card. |
+| **ML Logistic** | Train Logistic Regression Model | Interactive sliders for dataset ($X_i, X_j, Y$), iteration count, and learning rate. Displays live weights ($W_1, W_2, B$), loss, and interactive prediction probability indicator. |
+| **GLSL Editor** | Live GLSL Shader Execution | Multi-line code editor pre-loaded with Vector Add, Logistic Regression, and MatMul shader presets. Runs custom or preset GLSL on Vulkan GPU with latency reporting. |
+| **CPU vs GPU** | Matrix Multiplication Benchmark | Computes $256 \times 256$ matrix multiplication on CPU vs. Motif GPU. Displays latency (ms), throughput (GFLOPS), correctness check, and speedup highlight card. |
 
 ---
 
-## 🗺️ Roadmap & Future Releases
+## Roadmap & Future Releases
 
 - [x] **v0.1.0**: Core AST-to-GLSL compiler, `vecadd` & `matmul` kernels, C++ Kompute JNI codegen, 3-tab Android 15 Jetpack Compose application.
 - [ ] **v0.2.0**:
