@@ -12,6 +12,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.*
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -284,7 +285,7 @@ fun LogisticRegressionTab() {
                     fontSize = 16.sp
                 )
                 LinearProgressIndicator(
-                    progress = { prob },
+                    progress = prob,
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(12.dp),
@@ -303,6 +304,7 @@ fun LogisticRegressionTab() {
 // ============================================================================
 // TAB 2: GLSL SHADER EDITOR & PRESETS
 // ============================================================================
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun GlslEditorTab() {
     val presets = listOf(

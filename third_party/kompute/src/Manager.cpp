@@ -178,6 +178,15 @@ Manager::createInstance()
 
     KP_LOG_DEBUG("Kompute Manager creating instance");
 
+#if VK_USE_PLATFORM_ANDROID_KHR || KOMPUTE_OPT_ANDROID_BUILD
+    vk::DynamicLoader dl;
+    PFN_vkGetInstanceProcAddr vkGetInstanceProcAddr =
+      dl.getProcAddress<PFN_vkGetInstanceProcAddr>("vkGetInstanceProcAddr");
+    if (vkGetInstanceProcAddr) {
+        VULKAN_HPP_DEFAULT_DISPATCHER.init(vkGetInstanceProcAddr);
+    }
+#endif // VK_USE_PLATFORM_ANDROID_KHR || KOMPUTE_OPT_ANDROID_BUILD
+
     this->mFreeInstance = true;
 
     vk::ApplicationInfo applicationInfo;
@@ -265,13 +274,6 @@ Manager::createInstance()
                     "layer names");
     }
 #endif
-
-#if VK_USE_PLATFORM_ANDROID_KHR || KOMPUTE_OPT_ANDROID_BUILD
-    vk::DynamicLoader dl;
-    PFN_vkGetInstanceProcAddr vkGetInstanceProcAddr =
-      dl.getProcAddress<PFN_vkGetInstanceProcAddr>("vkGetInstanceProcAddr");
-    VULKAN_HPP_DEFAULT_DISPATCHER.init(vkGetInstanceProcAddr);
-#endif // VK_USE_PLATFORM_ANDROID_KHR || KOMPUTE_OPT_ANDROID_BUILD
 
     this->mInstance = std::make_shared<vk::Instance>();
     vk::Result createInstanceResult = vk::createInstance(
@@ -483,6 +485,11 @@ Manager::createDevice(const std::vector<uint32_t>& familyQueueIndices,
     this->mDevice = std::make_shared<vk::Device>();
     physicalDevice.createDevice(
       &deviceCreateInfo, nullptr, this->mDevice.get());
+
+#if VK_USE_PLATFORM_ANDROID_KHR || KOMPUTE_OPT_ANDROID_BUILD
+    VULKAN_HPP_DEFAULT_DISPATCHER.init(*this->mDevice);
+#endif // VK_USE_PLATFORM_ANDROID_KHR || KOMPUTE_OPT_ANDROID_BUILD
+
     KP_LOG_DEBUG("Kompute Manager device created");
 
     for (const uint32_t& familyQueueIndex : this->mComputeQueueFamilyIndices) {
