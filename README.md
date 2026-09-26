@@ -250,5 +250,5 @@ This project is licensed under the **MIT License** — see the [LICENSE](LICENSE
 ---
 
 <div align="center">
-  <sub>Built with ❤️ by the Motif Core Team</sub>
+  <sub>Built with ❤️ by Chima Emmanuel</sub>
 </div>
